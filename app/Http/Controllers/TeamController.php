@@ -29,7 +29,9 @@ class TeamController extends Controller
      */
     public function create()
     {
+        //shows the create view from create.blade.php
         return view('teams.create');
+
     }
 
     /**
