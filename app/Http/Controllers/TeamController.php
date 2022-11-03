@@ -88,8 +88,11 @@ class TeamController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        //This shows the information of the chosen id under that specific user
+        $team = Team::where('id',$id)->where('user_id',Auth::id())->first();
+        return view('teams.show')->with('team',$team);
+
+    }  
 
     /**
      * Show the form for editing the specified resource.
