@@ -18,7 +18,7 @@
                     {{-- This gets each team name and put a 200 character limit on it --}}
                 <div>
                     <p class="mt-2">
-                        {{ Str::limit($team->name, 200) }}
+                     <a href="{{route('teams.show', $team->id) }}">{{ Str::limit($team->name, 200) }}
                     </p>
                 </div>
 
@@ -35,7 +35,7 @@
                 <div>
                     <img src="{{ asset('storage/images/' . $team->team_image) }}" width="150">  
                 </div>
-                
+
                     <span class="block mt-4 text-sm opacity-70">{{ $team->updated_at->diffForHumans() }}</span>
                 </div>
                 {{-- If there are no teams and its 'empty' it will show this message --}}
