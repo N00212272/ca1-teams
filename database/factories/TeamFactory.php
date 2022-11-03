@@ -19,10 +19,10 @@ class TeamFactory extends Factory
         return [
             //means it chooses this db and uses a fake word,text or name
             'name' => $this->faker->word,
-            'user_id' => 1,
+            'user_id' => 3,
             'category' => $this->faker->text(30),
             'description' => $this->faker->text(200),
-            'team_image' => "public\images\team_placeholder.jpg",
+            'team_image' => "team_placeholder.jpg",
             'sponsor' => $this->faker->name
         ];
     }
