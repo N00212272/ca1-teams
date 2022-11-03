@@ -11,14 +11,13 @@
             <a href="{{ route('teams.create') }}" class="btn-link btn-lg mb-2">+ New Team</a>
             @forelse ($teams as $team)
                 <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
-                {{-- This button brings you to the teams show page if there are teams --}}
-                    {{-- <h2 class="font-bold text-2xl">
-                        <a href="{{ route('teams.show', $team->uuid) }}">{{ $team->title }}</a>
-                    </h2> --}}
+               
+                   
                     {{-- This gets each team name and put a 200 character limit on it --}}
                 <div>
                     <p class="mt-2">
-                     <a href="{{route('teams.show', $team->id) }}">{{ Str::limit($team->name, 200) }}
+                     {{-- This button brings you to the teams show page if there are teams --}}
+                     <a href="{{route('teams.show', $team->uuid) }}">{{ Str::limit($team->name, 200) }}
                     </p>
                 </div>
 
