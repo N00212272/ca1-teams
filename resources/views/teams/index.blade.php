@@ -17,7 +17,7 @@
                 <div>
                     <p class="mt-2">
                      {{-- This button brings you to the teams show page if there are teams --}}
-                     <a href="{{route('teams.show', $team->uuid) }}">{{ Str::limit($team->name, 200) }}
+                     <a href="{{route('teams.show', $team) }}">{{ Str::limit($team->name, 200) }}
                     </p>
                 </div>
 
