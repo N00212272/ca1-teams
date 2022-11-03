@@ -13,4 +13,10 @@ class team extends Model
     protected $guarded = [];
     // where if i would want them to be fillable i would change the guarded to fillable like this
     //  protected $fillable = [''];
+
+//This is so a different user cant view another users team
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
 }
