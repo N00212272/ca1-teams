@@ -50,7 +50,7 @@ class TeamController extends Controller
             'name' => 'required|max:120',
             'category' => 'required',
             'description' => 'required',
-            // 'team_image' => 'required'
+            'team_image' => 'required'
         ]);
         //creating variable for image and its extension
         $team_image = $request->file('team_image');
@@ -65,8 +65,8 @@ class TeamController extends Controller
         // Creating a new team function
             $team = new Team;
 
+            $team->uuid = Str::uuid();
             $team->user_id =Auth::id();
-            // $team->uuid = Str::uuid();
             $team->name =$request->name;
             $team->category =$request->category;
             $team->description =$request->description;
@@ -86,10 +86,10 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($uuid)
     {
         //This shows the information of the chosen id under that specific user
-        $team = Team::where('id',$id)->where('user_id',Auth::id())->first();
+        $team = Team::where('uuid',$uuid)->where('user_id',Auth::id())->first();
         return view('teams.show')->with('team',$team);
 
     }  
