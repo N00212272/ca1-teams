@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 
+
 class TeamController extends Controller
 {
     /**
@@ -17,6 +18,7 @@ class TeamController extends Controller
     public function index()
     {
     //fetch Teams in order of when they were last update - latest updated returned first
+    //paginate displays whatever amount is placed e.g i have 10
     $teams = Team::where('user_id', Auth::id())->latest('updated_at')->paginate(10);
     //dd($teams);
     return view('teams.index')->with('teams', $teams);
@@ -42,7 +44,40 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
+        
+        //   dd($request);
+        $request->validate([
+            'name' => 'required|max:120',
+            'category' => 'required',
+            'description' => 'required',
+            // 'team_image' => 'required'
+        ]);
+        //creating variable for image and its extension
+        $team_image = $request->file('team_image');
+        $extension = $team_image->getClientOriginalExtension();
 
+        //file name has to be unique so i added in this for a unqiue name so it can be definitly be found
+        $filename= date('Y-m-d-His') . '_' . $request->input('title') . '.' . $extension;
+        
+        // store the file $team_image in /public/images, and name is $filename
+        $path = $team_image->storeAs('public/images', $filename);
+
+        // Creating a new team function
+            $team = new Team;
+
+            $team->user_id =Auth::id();
+            // $team->uuid = Str::uuid();
+            $team->name =$request->name;
+            $team->category =$request->category;
+            $team->description =$request->description;
+            $team->team_image =$filename;
+            
+
+            $team->save();
+            
+      
+
+        return to_route('teams.index');
     }
 
     /**
