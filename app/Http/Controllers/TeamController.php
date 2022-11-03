@@ -86,10 +86,14 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($uuid)
+    public function show(Team $team)
     {
+        //if statement which doesnt allow another user to view other teams
+        if($team->user_id != Auth::id()){
+            return abort(403);
+        }
         //This shows the information of the chosen id under that specific user
-        $team = Team::where('uuid',$uuid)->where('user_id',Auth::id())->first();
+        // $team = Team::where('uuid',$uuid)->where('user_id',Auth::id())->first();
         return view('teams.show')->with('team',$team);
 
     }  
