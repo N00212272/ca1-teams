@@ -17,8 +17,12 @@
                   <p class="opacity-70 ml-8">
                     <strong>Updated at: </strong> {{ $team->updated_at->diffForHumans() }}
                 </p>
-
+               {{-- button to bring you to edit page --}}
+                  <a href="{{route ('teams.edit', $team )}}" class="btn-link ml-auto">Edit Note</a>
                 </div>
+
+             
+
                     <p class="mt-2">
                    {{ Str::limit($team->name, 200) }}
                     </p>
