@@ -166,9 +166,16 @@ class TeamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Team $team)
     {
-        //
+         //if statement which doesnt allow another user to update other teams
+         if($team->user_id != Auth::id()){
+            return abort(403);
+        }
+        //deletes the team
+        $team->delete();
+
+        return to_route('teams.index');
     }
 }
 
