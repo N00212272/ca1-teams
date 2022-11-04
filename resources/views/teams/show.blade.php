@@ -19,10 +19,15 @@
                 </p>
                {{-- button to bring you to edit page --}}
                   <a href="{{route ('teams.edit', $team )}}" class="btn-link ml-auto">Edit Note</a>
-                </div>
-
-             
-
+               
+                 {{-- deletes the team --}}
+                 <form action="{{ route('teams.destroy',$team) }}" method="post">
+                  {{-- laravel function to delete form --}}
+                    @method('delete')
+                    @csrf
+                    <button type="submit" class="btn btn-danger ml-4" onclick="return confirm('Are you sure you want to delete')">Delete</button>
+                     </form>
+               </div>
                     <p class="mt-2">
                    {{ Str::limit($team->name, 200) }}
                     </p>
