@@ -4,8 +4,25 @@
             {{ __('Teams') }}
         </h2>
     </x-slot>
+{{-- This is a form which allows users to type and search for specific teams --}}
 
+		<form action="/search" method="POST" role="search">
+			{{ csrf_field() }}
+			<div class="input-group">
+				<input type="text" class="form-control" name="q"
+					placeholder="Search teams by name"> <span class="input-group-btn">
+					<button type="submit" class="btn btn-default">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</span>
+			
+		</form>
+
+           
+		
     <div class="py-12">
+ 
+
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         {{-- This button brings you to the teams create page where a team is created --}}
             <a href="{{ route('teams.create') }}" class="btn-link btn-lg mb-2">+ New Team</a>
