@@ -44,8 +44,37 @@
                     @endauth
                 </div>
             @endif
+
+           
             {{-- Simple h1 text which says teams --}}
+             <div>
              <h1 class="teams">Teams</h1>
+            </div>
+
+              	@if(isset($details))
+                <div class="ml-10">
+			<p> The Search results for your query <b> {{ $query }} </b> are :</p>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Team Name</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					@foreach($details as $team)
+					<tr>
+						<td class ="btn-link">
+                         <a href="{{route('teams.show', $team) }}">{{$team->name}}
+                         </td>
+					</tr>
+					@endforeach
+				</tbody>
+			</table>
+			@elseif(isset($message))
+			<p>{{ $message }}</p>
+			@endif
+            </div>
 
              {{-- Removed all these irrelvant things --}}
 
