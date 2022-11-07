@@ -13,26 +13,24 @@
                 @method('put')
                     @csrf
                     {{-- Name input --}}
-                    <x-text-input
+                      {{-- FIELD connects to the error messages --}}
+                     <x-textarea
                         type="text"
-                        name="name"
-                        {{-- FIELD connects to the error messages --}}
                         field="name"
                         placeholder="name"
                         class="w-full"
                         autocomplete="off"
-                        {{-- Value keeps the old value if an error occurs or if the keeps the old value from the database--}}
-                        :value="@old('name', $team->name)"></x-text-input>
+                        :value="@old('name', $team->name)"></x-textarea>
                      
                     {{-- category input --}}
-                    <x-textarea
+                     <x-textarea
                         type="text"
                         name="category"
                         field="category"
                         placeholder="category"
                         class="w-full"
                         autocomplete="off"
-                        :value="@old('category', $team->category)"></x-text-input>
+                        :value="@old('category', $team->category)"></x-textarea>
                       <x-textarea
                         type="text"
                         name="description"
@@ -42,6 +40,7 @@
                         class="w-full mt-6"
                         :value="@old('description', $team->description)"></x-textarea>
 
+                            {{-- Doesnt work --}}
                         <input
                         type="file"
                         name="team_image"

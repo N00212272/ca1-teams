@@ -12,7 +12,7 @@
                 <form action="{{ route('teams.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     {{-- Name input --}}
-                    <x-text-input
+                    <x-textarea
                         type="text"
                         name="name"
                         {{-- FIELD connects to the error messages --}}
@@ -21,7 +21,7 @@
                         class="w-full"
                         autocomplete="off"
                         {{-- Value keeps the old value if an error occurs if was correct --}}
-                        :value="@old('name')"></x-text-input>
+                        :value="@old('name')"></x-textarea>
                      
                     {{-- category input --}}
                     <x-textarea
@@ -31,7 +31,7 @@
                         placeholder="category"
                         class="w-full"
                         autocomplete="off"
-                        :value="@old('category')"></x-text-input>
+                        :value="@old('category')"></x-textarea>
                       <x-textarea
                         type="text"
                         name="description"
