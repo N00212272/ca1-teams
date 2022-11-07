@@ -8,6 +8,23 @@ h1.teams{
     font-size: 100px;
     font-weight: bold;
 }
+h2.searchQ{
+    font-size: 30px;
+    font-weight: bold;
+}
+.red{
+    font-weight: bold;
+    color: red;
+    text-align: center;
+    background-color: black;
+    font-size: 50px;
+}
+.input-group{
+    text-align: center
+}
+.query{
+    text-align: center;
+}
 /* design for buttons */
 @layer components {
     .btn-link {
