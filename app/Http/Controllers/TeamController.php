@@ -147,7 +147,7 @@ class TeamController extends Controller
             'name' => 'required|max:120',
             'category' => 'required',
             'description' => 'required',
-            'team_image' => 'required'
+            // 'team_image' => 'required'
         ]);
             //updates the variables in database
         $team->update([
