@@ -22,8 +22,8 @@ class TeamFactory extends Factory
             'user_id' => 3,
             'category' => $this->faker->text(30),
             'description' => $this->faker->text(200),
-            'team_image' => "team_placeholder.jpg",
-            'sponsor' => $this->faker->name
+            'team_image' => $this->faker->randomElement(['liverpool.png', 'manchester.png', 'leeds.png', 'manchester C.png']),
+            'sponsor' => $this->faker->name,
         ];
     }
 }
