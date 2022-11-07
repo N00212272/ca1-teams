@@ -18,7 +18,7 @@
 			
 		</form>
 
-           
+           </div>
 		
     <div class="py-12">
  
@@ -32,6 +32,7 @@
                    
                     {{-- This gets each team name and put a 200 character limit on it --}}
                 <div>
+                <h3 class="titles">name<h3>
                     <p class="mt-2">
                      {{-- This button brings you to the teams show page if there are teams --}}
                      <a href="{{route('teams.show', $team) }}">{{ Str::limit($team->name, 200) }}
@@ -39,16 +40,20 @@
                 </div>
 
                 <div>
+                <h3 class="titles">category<h3>
                     <p class="mt-2">
                         {{ Str::limit($team->category) }}
                     </p>
                 </div>
+
                 <div>
+                <h3 class="titles">description<h3>
                     <p class="mt-2">
                         {{ Str::limit($team->description,250) }}
                     </p>
                 </div>
                 <div>
+                <h3 class="titles">Team image<h3>
                     <img src="{{ asset('storage/images/' . $team->team_image) }}" width="150">  
                 </div>
 
