@@ -1,6 +1,6 @@
 <div>
 
-{{-- keeps the value if there is no error --}}
+{{-- if there is nothing in the value or field it wont let it send to the db --}}
 @props(['disabled' => false, 'field'=>'', 'value'=>''])
 <textarea {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge(['class' => 'rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50']) !!}
 
