@@ -17,6 +17,7 @@
                      <x-textarea
                         type="text"
                         field="name"
+                        name="name"
                         placeholder="name"
                         class="w-full"
                         autocomplete="off"
