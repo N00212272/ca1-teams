@@ -15,7 +15,7 @@ class TeamSeeder extends Seeder
      */
     public function run()
     {
-        //creates 50 different values
+        //creates 20 different values
         Team::factory()->times(20)->create();
     }
 }
