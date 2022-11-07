@@ -19,6 +19,7 @@ Route::get('/dashboard', function () {
 //This line create a route every function in the team resource controller
 Route::resource('/teams', TeamController::class)->middleware(['auth']);
 
+// This function searchs through the db for the input at any position in "name" 
 Route::post ( '/search', function () {
 	$q = Request::input ( 'q' );
 
