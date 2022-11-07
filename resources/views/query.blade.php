@@ -16,8 +16,8 @@
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
            
           
-           
-
+           {{-- THIS PAGE is for the search function  --}}
+{{-- if the function finds a team with the query then print out names with link --}}
               	@if(isset($details))
                 <div class=" container ml-10 query">
 			<h2 class="searchQ"> The Search results for your query <b> {{ $query }} </b> are :</h2>
@@ -39,6 +39,7 @@
 					@endforeach
 				</tbody>
 			</table>
+			{{-- however  --}}
 			@elseif(isset($message))
 			<a href="{{route('teams.index')}}"><p class="red ">{{ $message }}</p>
 			@endif
