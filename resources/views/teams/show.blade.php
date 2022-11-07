@@ -39,8 +39,7 @@
 
                  <img src="{{ asset('storage/images/' . $team->team_image) }}" width="150">  
 
-               
-                {{-- If there are no teams and its 'empty' it will show this message --}}
+              
             
          
         </div>
