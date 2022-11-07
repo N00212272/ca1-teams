@@ -25,6 +25,12 @@ h2.searchQ{
 .query{
     text-align: center;
 }
+h3.titles{
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 10px;
+    text-decoration: underline;
+}
 /* design for buttons */
 @layer components {
     .btn-link {
