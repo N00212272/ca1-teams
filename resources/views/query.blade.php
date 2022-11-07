@@ -31,6 +31,7 @@
 				<tbody>
 					@foreach($details as $team)
 					<tr>
+					{{-- this shows the teams which were found under the query with a link to that team --}}
 						<td class ="btn-link mb-2">
                          <a href="{{route('teams.show', $team) }}">{{$team->name}}
                          </td>
@@ -39,7 +40,7 @@
 					@endforeach
 				</tbody>
 			</table>
-			{{-- however  --}}
+			{{-- however if nothing was found it will provide the message seen in web.php with link to index --}}
 			@elseif(isset($message))
 			<a href="{{route('teams.index')}}"><p class="red ">{{ $message }}</p>
 			@endif
