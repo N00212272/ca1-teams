@@ -25,12 +25,12 @@ Route::post ( '/search', function () {
 	if($q != ""){
 		$team = Team::where ( 'name', 'LIKE', '%' . $q . '%' )->get ();
 		if (count ( $team ) > 0)
-			return view ( 'welcome' )->withDetails ( $team )->withQuery ( $q );
+			return view ( 'query' )->withDetails ( $team )->withQuery ( $q );
 		else
-			return view ( 'welcome' )->withMessage ( 'No Details found. Try to search again !' );
+			return view ( 'query' )->withMessage( 'No Details found. Return back to TEAMS!');
 	}
 	
-	return view ( 'search-functionality-in-laravel/welcome' )->withMessage ( 'No Details found. Try to search again !' );
+	return view ( 'search-functionality-in-laravel/query' )->withMessage ( 'No Details found. Try to search again !' );
 } );
 
 require __DIR__.'/auth.php';
