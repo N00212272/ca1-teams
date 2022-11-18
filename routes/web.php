@@ -1,12 +1,14 @@
 <?php
 //Tells VSC where to find teamcontroller
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\Admin\TeamController as AdminTeamController;
+use App\Http\Controllers\User\TeamController as UserTeamController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Team;
 use Illuminate\Support\Facades\Input;
 
 
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,7 +19,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 //This line create a route every function in the team resource controller
-Route::resource('/teams', TeamController::class)->middleware(['auth']);
+// Route::resource('/teams', TeamController::class)->middleware(['auth']);
+Route::resource('/admin/teams', AdminTeamController::class)->middleware(['auth'])->names('admin.teams');
+
+Route::resource('/user/teams', UserTeamController::class)->middleware(['auth'])->names('user.teams')->only(['index', 'show']);
+
 
 // This function searchs through the db for the input at any position in "name" 
 Route::post ( '/search', function () {
