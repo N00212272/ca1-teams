@@ -72,7 +72,7 @@ class TeamController extends Controller
         // Creating a new team function
             $team = new Team;
 
-            $team->uuid = Str::uuid();
+            // $team->uuid = Str::uuid();
             $team->user_id =Auth::id();
             $team->name =$request->name;
             $team->category =$request->category;
