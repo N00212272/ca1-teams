@@ -10,13 +10,18 @@ class team extends Model
     use HasFactory;
     // indicating that these fields are guarded
     // all fields are mass assigned
-    protected $guarded = [];
+    // protected $guarded = [];
     // where if i would want them to be fillable i would change the guarded to fillable like this
-    //  protected $fillable = [''];
+     protected $fillable = ['name','category','description','team_image','owner_id'];
 
 //This is so a different user cant view another users team
-    public function getRouteKeyName()
-    {
-        return 'uuid';
-    }
+    // public function getRouteKeyName()
+    // {
+    //     return 'uuid';
+    // }
+    
+    //indicates book is part of owner
+   public function owner(){
+    return $this->belongsTo(Owner::class);
+   }
 }
