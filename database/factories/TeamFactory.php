@@ -23,7 +23,6 @@ class TeamFactory extends Factory
             'category' => $this->faker->text(30),
             'description' => $this->faker->text(200),
             'team_image' => $this->faker->randomElement(['liverpool.png', 'manchester.png', 'leeds.png', 'manchester C.png']),
-            'sponsor' => $this->faker->name,
         ];
     }
 }
