@@ -37,7 +37,13 @@
                 {{-- this class wraps the text to make it look nicer --}}
                     <p class="mt-2 whitespace-pre-wrap">{{ $team->description }} </p>
 
-                 <img src="{{ asset('storage/images/' . $team->team_image) }}" width="150">  
+                <div class="px-12">
+                 <img src="{{ asset('storage/images/' . $team->team_image) }}" width="150" >  
+                </div>
+                      <p class="mt-2 whitespace-pre-wrap">{{ $team->owner->name }} </p>
+                       
+
+                    <p class="mt-2 whitespace-pre-wrap">{{ $team->owner->address  }} </p>
 
               
             
