@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Team;
+use App\Models\Owner;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -21,10 +22,20 @@ class TeamController extends Controller
     {
     $user = Auth::user();
     $user->authorizeRoles('admin');
+    //lazy loading gets all teams
+    // $teams = Team::all();
+
+    //eager loading
+    // $teams = Team::with('owner')->get();
+
+    //gets teams and paginates by 10
     $teams = Team::paginate(10);
+
     //fetch Teams in order of when they were last update - latest updated returned first
     //paginate displays whatever amount is placed e.g i have 10
     // $teams = Team::where('user_id', Auth::id())->latest('updated_at')->paginate(10);
+    
+    //die and dump
     //dd($teams);
     return view('admin.teams.index')->with('teams', $teams);
     }
@@ -38,8 +49,10 @@ class TeamController extends Controller
     {
         $user = Auth::user();
         $user->authorizeRoles('admin');
+
+        $owners = Owner::all();
         //shows the create view from create.blade.php
-        return view('admin.teams.create');
+        return view('admin.teams.create')->with('owners',$owners);
 
     }
 
@@ -57,7 +70,9 @@ class TeamController extends Controller
             'name' => 'required|max:120',
             'category' => 'required',
             'description' => 'required',
-            'team_image' => 'required'
+            'team_image' => 'required',
+            'owner_id' => 'required',
+            
         ]);
         //creating variable for image and its extension
         $team_image = $request->file('team_image');
@@ -78,7 +93,7 @@ class TeamController extends Controller
             $team->category =$request->category;
             $team->description =$request->description;
             $team->team_image =$filename;
-            
+            $team->owner_id = $request->owner_id;
 
             $team->save();
             
@@ -113,12 +128,16 @@ class TeamController extends Controller
      */
     public function edit(Team $team)
     {
+        $user = Auth::user();
+        $user->authorizeRoles('admin');
+
+        $owners = Owner::all();
           //if statement which doesnt allow another user to edit other teams
-          if($team->user_id != Auth::id()){
-            return abort(403);
-        }
+        //   if($team->user_id != Auth::id()){
+        //     return abort(403);
+        // }
         //This shows the information of the chosen id under that specific user
-        return view('admin.teams.edit')->with('team',$team);
+        return view('admin.teams.edit')->with('team',$team)->with('owners',$owners);
 
      
     }
@@ -132,7 +151,7 @@ class TeamController extends Controller
      */
     public function update(Request $request, Team $team)
     {
-
+   
              //creating variable for image and its extension
              $team_image = $request->file('team_image');
              $extension = $team_image->getClientOriginalExtension();
@@ -144,9 +163,9 @@ class TeamController extends Controller
              $path = $team_image->storeAs('public/images', $filename);
 
          //if statement which doesnt allow another user to update other teams
-         if($team->user_id != Auth::id()){
-            return abort(403);
-        }
+        //  if($team->user_id != Auth::id()){
+        //     return abort(403);
+        // }
 
         // dd($request);
         //validates updated database
@@ -154,6 +173,7 @@ class TeamController extends Controller
             'name' => 'required|max:120',
             'category' => 'required',
             'description' => 'required',
+            'owner_id' => 'required',
             // 'team_image' => 'required'
         ]);
             //updates the variables in database
@@ -161,10 +181,11 @@ class TeamController extends Controller
             'name' => $request->name,
             'category' => $request->category,
             'description' => $request->description,
-            'team_image' => $filename
+            'team_image' => $filename,
+            'owner_id' => $request->owner_id
         ]);
 
-        return to_route('admin.teams.show', $team);
+        return to_route('admin.teams.show',$team);
     }
 
     /**
@@ -176,9 +197,9 @@ class TeamController extends Controller
     public function destroy(Team $team)
     {
          //if statement which doesnt allow another user to update other teams
-         if($team->user_id != Auth::id()){
-            return abort(403);
-        }
+        //  if($team->user_id != Auth::id()){
+        //     return abort(403);
+        // }
         //deletes the team
         $team->delete();
 
