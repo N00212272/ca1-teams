@@ -16,8 +16,14 @@
                         {{ __('Teams') }}
                     </x-nav-link>
                 </div>
-            </div>
-
+           
+              {{-- Owner links --}}
+                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('home.owner.index')" :active="request()->routeIs('home.owner.index')">
+                        {{ __('Owners') }}
+                    </x-nav-link>
+                </div>
+        </div>
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown text-align="right" width="48">
