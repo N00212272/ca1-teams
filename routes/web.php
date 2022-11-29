@@ -3,12 +3,19 @@
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\Admin\TeamController as AdminTeamController;
 use App\Http\Controllers\User\TeamController as UserTeamController;
+use App\Http\Controllers\Admin\OwnerController as AdminOwnerController;
+use App\Http\Controllers\User\OwnerController as UserOwnerController;
+
 use Illuminate\Support\Facades\Route;
 use App\Models\Team;
+use App\Models\Owner;
 use Illuminate\Support\Facades\Input;
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
+
+//This is the controller for owners
+Route::get('/home/owners', [App\Http\Controllers\HomeController::class, 'OwnerIndex'])->name('home.owner.index');
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,6 +30,10 @@ Route::get('/dashboard', function () {
 Route::resource('/admin/teams', AdminTeamController::class)->middleware(['auth'])->names('admin.teams');
 
 Route::resource('/user/teams', UserTeamController::class)->middleware(['auth'])->names('user.teams')->only(['index', 'show']);
+
+Route::resource('/admin/owners', AdminOwnerController::class)->middleware(['auth'])->names('admin.owners');
+
+Route::resource('/user/owners', UserOwnerController::class)->middleware(['auth'])->names('user.owners')->only(['index', 'show']);
 
 
 // This function searchs through the db for the input at any position in "name" 
