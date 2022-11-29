@@ -47,7 +47,16 @@
                         class="w-full mt-6"
                         field="team_image"
                         >
-
+                    <div class="form-group">
+                        <label for="owner">owner</label>
+                        <select name="owner_id">
+                        @foreach ($owners as $owner)
+                        <option value="{{$owner->id}}" {{(old('owner_id') == $owner->id) ? "selected" : ""}}>
+                        {{$owner->name}}
+                        </option>
+                        @endforeach
+                        </select>
+                    </div>
                     <x-primary-button class="mt-6">Save Team</x-primary-button>
                 </form>
             </div>
