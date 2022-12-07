@@ -57,6 +57,13 @@
                         @endforeach
                         </select>
                     </div>
+                      <div class="form-group">
+                        <label for="sponsors"> <strong> Sponsors</strong> <br> </label>
+                        @foreach ($sponsors as $sponsor)
+                            <input type="checkbox", value="{{$sponsor->id}}" name="sponsors[]">
+                           {{$sponsor->name}}
+                        @endforeach
+                    </div>
                     <x-primary-button class="mt-6">Save Team</x-primary-button>
                 </form>
             </div>
