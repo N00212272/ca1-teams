@@ -55,13 +55,36 @@
                         <label for="owner">owner</label>
                         <select name="owner_id">
                         @foreach ($owners as $owner)
-                        <option value="{{$owner->id}}" {{(old('owner_id') == $owner->id) ? "selected" : ""}}>
+                        {{-- if statement shows the previous owner chosen --}}
+                        @if($owner->id == $team->owner->id)
+                        <option value="{{$owner->id}}" selected >
                         {{$owner->name}}
                         </option>
+                        @else
+                        <option value="{{$owner->id}}">
+                        {{$owner->name}}
+                        </option>
+                        @endif
                         @endforeach
                         </select>
                     </div>
                     
+                      <div class="form-group">
+                        <label for="sponsors"> <strong> Sponsors</strong> <br> </label>
+                        @foreach ($sponsors as $sponsor)
+                          {{-- @if($sponsor->id == $sponsor_team->sponsor->id)
+                             <input type="checkbox", value="{{$sponsor->id}}" checked>
+                           {{$sponsor->name}} 
+                         @else
+                             <input type="checkbox", value="{{$sponsor->id}}" name="sponsors[]">
+                             {{$sponsor->name}}
+                        @endif --}}
+                              <input type="checkbox", value="{{$sponsor->id}}" name="sponsors[]">
+                             {{$sponsor->name}}
+                        
+                        @endforeach
+                    </div>
+
                     <x-primary-button class="mt-6">Save Team</x-primary-button>
                 </form>
             </div>
