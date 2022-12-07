@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\TeamController as AdminTeamController;
 use App\Http\Controllers\User\TeamController as UserTeamController;
 use App\Http\Controllers\Admin\OwnerController as AdminOwnerController;
 use App\Http\Controllers\User\OwnerController as UserOwnerController;
+use App\Http\Controllers\Admin\SponsorController as AdminSponsorController;
+use App\Http\Controllers\User\SponsorController as UserSponsorController;
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Team;
@@ -16,6 +18,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //This is the controller for owners
 Route::get('/home/owners', [App\Http\Controllers\HomeController::class, 'OwnerIndex'])->name('home.owner.index');
+
+//This is the controller for sponsors
+Route::get('/home/sponsors', [App\Http\Controllers\HomeController::class, 'SponsorIndex'])->name('home.sponsor.index');
 
 Route::get('/', function () {
     return view('welcome');
@@ -35,6 +40,9 @@ Route::resource('/admin/owners', AdminOwnerController::class)->middleware(['auth
 
 Route::resource('/user/owners', UserOwnerController::class)->middleware(['auth'])->names('user.owners')->only(['index', 'show']);
 
+Route::resource('/admin/sponsors', AdminSponsorController::class)->middleware(['auth'])->names('admin.sponsors');
+
+Route::resource('/user/sponsors', UserSponsorController::class)->middleware(['auth'])->names('user.sponsors')->only(['index', 'show']);
 
 // This function searchs through the db for the input at any position in "name" 
 Route::post ( '/search', function () {
