@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class team extends Model
 {
     use HasFactory;
@@ -21,7 +22,17 @@ class team extends Model
     // }
     
     //indicates book is part of owner
+    //one to many
    public function owner(){
     return $this->belongsTo(Owner::class);
    }
+
+//many to many
+public function sponsors(){
+    return $this->belongsToMany(Sponsor::class)->withTimestamps();
+   }
+// public function sponsors()
+// {
+//     return $this->belongstoMany('App\Sponsor' , 'sponsor_team');
+// }
 }
