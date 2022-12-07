@@ -9,7 +9,8 @@ class Owner extends Model
 {
     use HasFactory;
 
-
+    protected $fillable = ['name','address'];
+    
     //returns the owners teams
     public function teams()
     {
