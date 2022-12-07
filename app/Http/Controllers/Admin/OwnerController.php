@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Owner;
+use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -97,6 +98,7 @@ class OwnerController extends Controller
         $user->authorizeRoles('admin');
 
         return view('admin.owners.edit')->with('owner',$owner);
+
     }
 
     /**
@@ -114,12 +116,10 @@ class OwnerController extends Controller
                     'address' => 'required'
                 ]);
         
-                $owner = new Owner;
-        
-                $owner->name =$request->name;
-                $owner->address =$request->address;
-        
-                $owner->save();
+                $owner->update([
+                    'name' => $request->name,
+                    'address' => $request->address
+                ]);
                 
           
         
