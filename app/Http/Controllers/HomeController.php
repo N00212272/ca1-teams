@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Owner;
+use App\Models\Sponsor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,5 +57,21 @@ class HomeController extends Controller
         }
         return redirect()->route($home);
     }
+     //This function brings you to the Sponsors index
+     public function sponsorIndex(Request $request)
+     {
+ 
+         $user = Auth::user();
+         $home = 'home';
+ 
+         if($user->hasRole('admin')){
+             $home = 'admin.sponsors.index';
+         }
+         else if ($user->hasRole('user')){
+             $home = 'user.sponsors.index';
+         }
+         return redirect()->route($home);
+     }
+     
+ }
     
-}
