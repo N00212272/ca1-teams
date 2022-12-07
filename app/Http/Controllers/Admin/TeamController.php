@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Team;
 use App\Models\Owner;
+use App\Models\Sponsor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -31,6 +32,10 @@ class TeamController extends Controller
     //gets teams and paginates by 10
     $teams = Team::paginate(10);
 
+    // $teams = Team::with('owner')
+    // ->with('sponsors')
+    // ->get();
+
     //fetch Teams in order of when they were last update - latest updated returned first
     //paginate displays whatever amount is placed e.g i have 10
     // $teams = Team::where('user_id', Auth::id())->latest('updated_at')->paginate(10);
@@ -51,8 +56,9 @@ class TeamController extends Controller
         $user->authorizeRoles('admin');
 
         $owners = Owner::all();
+        $sponsors = Sponsor::all();
         //shows the create view from create.blade.php
-        return view('admin.teams.create')->with('owners',$owners);
+        return view('admin.teams.create')->with('owners',$owners)->with('sponsors', $sponsors);
 
     }
 
@@ -72,6 +78,7 @@ class TeamController extends Controller
             'description' => 'required',
             'team_image' => 'required',
             'owner_id' => 'required',
+            'sponsors' => ['required'],
             
         ]);
         //creating variable for image and its extension
@@ -94,12 +101,18 @@ class TeamController extends Controller
             $team->description =$request->description;
             $team->team_image =$filename;
             $team->owner_id = $request->owner_id;
+            // $team->sponsor = $request->sponsor;
 
             $team->save();
             
       
+        //adds entry to pivot table
+        $team->sponsors()->attach($request->sponsors);
 
         return to_route('admin.teams.index');
+
+       
+
     }
 
     /**
@@ -132,12 +145,13 @@ class TeamController extends Controller
         $user->authorizeRoles('admin');
 
         $owners = Owner::all();
+        $sponsors = Sponsor::all();
           //if statement which doesnt allow another user to edit other teams
         //   if($team->user_id != Auth::id()){
         //     return abort(403);
         // }
         //This shows the information of the chosen id under that specific user
-        return view('admin.teams.edit')->with('team',$team)->with('owners',$owners);
+        return view('admin.teams.edit')->with('team',$team)->with('owners',$owners)->with('sponsors',$sponsors);
 
      
     }
@@ -174,6 +188,7 @@ class TeamController extends Controller
             'category' => 'required',
             'description' => 'required',
             'owner_id' => 'required',
+            'sponsors' => ['required'],
             // 'team_image' => 'required'
         ]);
             //updates the variables in database
@@ -182,10 +197,24 @@ class TeamController extends Controller
             'category' => $request->category,
             'description' => $request->description,
             'team_image' => $filename,
-            'owner_id' => $request->owner_id
+            'owner_id' => $request->owner_id,
+            // 'sponsor'=> $request->sponsor
         ]);
+        
+         
+        
+        //deletes existing ids
+          $team->sponsors()->detach();
+           //adds entry to pivot table
+            $team->sponsors()->attach($request->sponsors);
+            
+            // $team->sponsors()->toggle([1, 2, 3]);
+        //   $team->sponsors()->sync([1, 2, 3]);
+        
+       
 
         return to_route('admin.teams.show',$team);
+      
     }
 
     /**
