@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
          $this->call(UserSeeder::class);
          //allows the hasTeams() function to run which seeds teams table
          $this->call(OwnerSeeder::class);
+
+         $this->call(SponsorSeeder::class);
     
     }
 }
