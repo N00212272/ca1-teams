@@ -28,26 +28,34 @@
                     <button type="submit" class="btn btn-danger ml-4" onclick="return confirm('Are you sure you want to delete')">Delete</button>
                      </form>
                </div>
-                    <p class="mt-2">
-                   {{ Str::limit($team->name, 200) }}
-                    </p>
-             
-                     <p class="mt-2 whitespace-pre-wrap">{{($team->category) }}</p>
+                    
+                     <p class="mt-2 whitespace-pre-wrap">
+                      <p class="font-bold">name</p>{{($team->name) }}</p>
+
+                
+                     <p class="mt-2">
+                      <p class="font-bold">category</p>{{($team->category) }}</p>
                 
                 {{-- this class wraps the text to make it look nicer --}}
-                    <p class="mt-2 whitespace-pre-wrap">{{ $team->description }} </p>
+                    <p class="mt-2 whitespace-pre-wrap"><p class="font-bold">description</p>{{ $team->description }} </p>
 
-                <div class="px-12">
+                
+                <div>
+                <p class="font-bold">team image</p>
                  <img src="{{ asset('storage/images/' . $team->team_image) }}" width="150" >  
                 </div>
-                      <p class="mt-2 whitespace-pre-wrap">{{ $team->owner->name }} </p>
-                       
-
-                    <p class="mt-2 whitespace-pre-wrap">{{ $team->owner->address  }} </p>
-
               
+                      <p class="mt-2 whitespace-pre-wrap"> <p class="font-bold">Owners name</p>{{ $team->owner->name }} </p>
+                       <br>
+                    <p class="mt-2 whitespace-pre-wrap"><p class="font-bold">Owners address</p>{{ $team->owner->address  }} </p>
             
-         
-        </div>
+                       <br>
+
+               @foreach ($team->sponsors as $sponsor)
+                        <p>{{$sponsor->name}}</p>
+                    
+                @endforeach
+                </div>
+                 
     </div>
 </x-app-layout>
