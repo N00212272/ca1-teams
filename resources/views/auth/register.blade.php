@@ -26,7 +26,15 @@
 
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
-
+                    {{-- Functionality to add register user and choose role --}}
+            {{-- couldnt get it to work --}}
+                     {{-- <div class="form-group">
+                        <label for="role"> <strong> Roles</strong> <br> </label>
+                        @foreach ($roles as $role)
+                            <input type="checkbox", value="{{$role->id}}" name="roles[]">
+                           {{$role->name}}
+                        @endforeach
+                    </div> --}}
             <!-- Password -->
             <div class="mt-4">
                 <x-input-label for="password" :value="__('Password')" />
