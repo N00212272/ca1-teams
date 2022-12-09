@@ -71,17 +71,12 @@
                     
                       <div class="form-group">
                         <label for="sponsors"> <strong> Sponsors</strong> <br> </label>
+                        {{--Gets all the sponsers into an array with checkbox  --}}
                         @foreach ($sponsors as $sponsor)
-                          {{-- @if($sponsor->id == $sponsor_team->sponsor->id)
-                             <input type="checkbox", value="{{$sponsor->id}}" checked>
-                           {{$sponsor->name}} 
-                         @else
-                             <input type="checkbox", value="{{$sponsor->id}}" name="sponsors[]">
-                             {{$sponsor->name}}
-                        @endif --}}
-                              <input type="checkbox", value="{{$sponsor->id}}" name="sponsors[]">
-                             {{$sponsor->name}}
-                        
+                         <input type="checkbox" name="sponsors[]" value="{{$sponsor->id}}" 
+                         {{-- In this array the sponsor id of this team = to the sponsor id in the pivot table is checked with the name with the sponser printed --}}
+                          {{ in_array($sponsor->id,$sponsorIds) ? 'checked' : '' }}>
+                           {{$sponsor->name}}                       
                         @endforeach
                     </div>
 

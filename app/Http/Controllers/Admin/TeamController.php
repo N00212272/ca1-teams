@@ -146,12 +146,15 @@ class TeamController extends Controller
 
         $owners = Owner::all();
         $sponsors = Sponsor::all();
+        //This gets the sponsors id from the pivot table and plucks the id to an array
+        $sponsorIds = $team->sponsors->pluck('id')->toArray();
           //if statement which doesnt allow another user to edit other teams
         //   if($team->user_id != Auth::id()){
         //     return abort(403);
         // }
         //This shows the information of the chosen id under that specific user
-        return view('admin.teams.edit')->with('team',$team)->with('owners',$owners)->with('sponsors',$sponsors);
+        // Added in sponsorIds to be able to view in edit page
+        return view('admin.teams.edit')->with('team',$team)->with('owners',$owners)->with('sponsors',$sponsors)->with('sponsorIds', $sponsorIds);
 
      
     }
