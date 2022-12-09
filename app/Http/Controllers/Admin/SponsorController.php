@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Sponsor;
 use Illuminate\Support\Facades\Auth;
 
-
+//controller for sponsor 
 class SponsorController extends Controller
 {
     /**

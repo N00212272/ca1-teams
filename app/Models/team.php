@@ -31,6 +31,7 @@ class team extends Model
 public function sponsors(){
     return $this->belongsToMany(Sponsor::class)->withTimestamps();
    }
+   //This was to do with user extra functionality
 // public function sponsors()
 // {
 //     return $this->belongstoMany('App\Sponsor' , 'sponsor_team');

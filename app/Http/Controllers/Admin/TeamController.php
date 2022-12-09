@@ -32,11 +32,12 @@ class TeamController extends Controller
     //gets teams and paginates by 10
     $teams = Team::paginate(10);
 
+        //eager loading did not work
     // $teams = Team::with('owner')
     // ->with('sponsors')
     // ->get();
 
-    //fetch Teams in order of when they were last update - latest updated returned first
+    //fetch Teams in order of when they were last update - latest updated returned first also it only shows the teams which the user created
     //paginate displays whatever amount is placed e.g i have 10
     // $teams = Team::where('user_id', Auth::id())->latest('updated_at')->paginate(10);
     

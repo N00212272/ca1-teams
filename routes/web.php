@@ -1,10 +1,13 @@
 <?php
 //Tells VSC where to find teamcontroller
 use App\Http\Controllers\TeamController;
+//Team controllers
 use App\Http\Controllers\Admin\TeamController as AdminTeamController;
 use App\Http\Controllers\User\TeamController as UserTeamController;
+//owner controllers
 use App\Http\Controllers\Admin\OwnerController as AdminOwnerController;
 use App\Http\Controllers\User\OwnerController as UserOwnerController;
+//sponsor controllers
 use App\Http\Controllers\Admin\SponsorController as AdminSponsorController;
 use App\Http\Controllers\User\SponsorController as UserSponsorController;
 
@@ -22,6 +25,23 @@ Route::get('/home/owners', [App\Http\Controllers\HomeController::class, 'OwnerIn
 //This is the controller for sponsors
 Route::get('/home/sponsors', [App\Http\Controllers\HomeController::class, 'SponsorIndex'])->name('home.sponsor.index');
 
+//This line create a route every function in the team resource controller
+// Route::resource('/teams', TeamController::class)->middleware(['auth']);
+Route::resource('/admin/teams', AdminTeamController::class)->middleware(['auth'])->names('admin.teams');
+
+Route::resource('/user/teams', UserTeamController::class)->middleware(['auth'])->names('user.teams')->only(['index', 'show']);
+
+//Routes for owner
+Route::resource('/admin/owners', AdminOwnerController::class)->middleware(['auth'])->names('admin.owners');
+
+Route::resource('/user/owners', UserOwnerController::class)->middleware(['auth'])->names('user.owners')->only(['index', 'show']);
+
+//routes for sponsor
+Route::resource('/admin/sponsors', AdminSponsorController::class)->middleware(['auth'])->names('admin.sponsors');
+
+Route::resource('/user/sponsors', UserSponsorController::class)->middleware(['auth'])->names('user.sponsors')->only(['index', 'show']);
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -29,20 +49,6 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-//This line create a route every function in the team resource controller
-// Route::resource('/teams', TeamController::class)->middleware(['auth']);
-Route::resource('/admin/teams', AdminTeamController::class)->middleware(['auth'])->names('admin.teams');
-
-Route::resource('/user/teams', UserTeamController::class)->middleware(['auth'])->names('user.teams')->only(['index', 'show']);
-
-Route::resource('/admin/owners', AdminOwnerController::class)->middleware(['auth'])->names('admin.owners');
-
-Route::resource('/user/owners', UserOwnerController::class)->middleware(['auth'])->names('user.owners')->only(['index', 'show']);
-
-Route::resource('/admin/sponsors', AdminSponsorController::class)->middleware(['auth'])->names('admin.sponsors');
-
-Route::resource('/user/sponsors', UserSponsorController::class)->middleware(['auth'])->names('user.sponsors')->only(['index', 'show']);
 
 // This function searchs through the db for the input at any position in "name" 
 Route::post ( '/search', function () {

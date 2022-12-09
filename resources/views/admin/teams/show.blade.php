@@ -52,8 +52,9 @@
                        <br>
 
                @foreach ($team->sponsors as $sponsor)
+                        <p class="font-bold">Sponsor
                         <p>{{$sponsor->name}}</p>
-                    
+                        </p>
                 @endforeach
                 </div>
                  
