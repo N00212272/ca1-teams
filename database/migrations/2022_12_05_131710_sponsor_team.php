@@ -18,8 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('sponsor_id');
             $table->unsignedBigInteger('team_id');
 
-            $table->foreign('sponsor_id')->references('id')->on('sponsors')->onUpdate('cascade')->onDelete('restrict');
-            $table->foreign('team_id')->references('id')->on('teams')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('sponsor_id')->references('id')->on('sponsors')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('team_id')->references('id')->on('teams')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
